@@ -13,7 +13,7 @@ export default function Dashboard({ accounts = [], recentTransactions = [], tota
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Banking Dashboard
+                    BanK
                 </h2>
             }
         >
