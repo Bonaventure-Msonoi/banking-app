@@ -69,7 +69,9 @@ export default function Welcome({ auth }) {
                                 <p className="text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
                                     This is a space to welcome visitors to the site. 
                                     Grab their attention with copy that clearly 
-                                    states what the site is about.
+                                    states what the site is about. and ofcourse this is going to be long text to test the layout.
+
+                                    <i color='red' style={{fontSize: '20px'}} fontfamily='verdana'>Bonnie</i>
                                 </p>
                                 
                                 {!auth.user && (
