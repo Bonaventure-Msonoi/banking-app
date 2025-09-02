@@ -60,14 +60,14 @@ export default function Welcome({ auth }) {
                             {/* Left Side - Content */}
                             <div className="text-left">
                                 <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                                    FUTURE-READY,<br />
+                                    BIG bucks,<br />
                                     <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                                        SMART BANKING
+                                        SMA3T BANKING
                                     </span>
                                 </h1>
                                 
                                 <p className="text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
-                                    This is a space to welcome visitors to the site. 
+                                    YuHp This is a space to welcome visitors to the site. 
                                     Grab their attention with copy that clearly 
                                     states what the site is about. and ofcourse this is going to be long text to test the layout.
 
