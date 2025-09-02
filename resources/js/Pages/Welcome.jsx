@@ -71,6 +71,8 @@ export default function Welcome({ auth }) {
                                     Grab their attention with copy that clearly 
                                     states what the site is about. and ofcourse this is going to be long text to test the layout.
 
+                                    otherwise, this is bonita speaking.
+
                                     <i color='red' style={{fontSize: '20px'}} fontfamily='verdana'>Bonnie</i>
                                 </p>
                                 
