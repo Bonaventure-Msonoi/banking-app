@@ -194,7 +194,7 @@ export default function Welcome({ auth }) {
                                         </svg>
                                     </div>
                                     <h3 className="text-xl font-semibold text-white mb-2">Smart Analytics</h3>
-                                    <p className="text-white/70">Track your spending with intelligent insights and budgeting tools.</p>
+                                    <p className="text-white/70">Track your Zpending with intelligent ins1ghts and budget1ng t00ls.</p>
                                 </div>
                             </div>
                         </div>
