@@ -1,0 +1,5 @@
+{
+    "readme": [
+        "This file forces Render to detect this as a PHP app"
+    ]
+}
