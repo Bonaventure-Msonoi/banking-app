@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: banking-app
+    env: php
+    buildCommand: |
+      composer install --optimize-autoloader --no-dev
+      npm ci
+      npm run build
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+    startCommand: |
+      php artisan migrate --force
+      php artisan db:seed --class=BankingSeeder --force
+      php artisan serve --host=0.0.0.0 --port=$PORT
+    envVars:
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: banking-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: banking-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: banking-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: banking-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: banking-db
+          property: password
+
+databases:
+  - name: banking-db
+    databaseName: banking_app
+    user: banking_user
