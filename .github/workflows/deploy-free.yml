@@ -1,0 +1,87 @@
+name: Deploy to Free Hosting
+
+on:
+  push:
+    branches: [ main, demo ]
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  deploy-railway:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Deploy to Railway
+      uses: railwayapp/cli@v3
+      with:
+        command: up --detach
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  deploy-render:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/demo'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Deploy to Render
+      run: |
+        curl -X POST \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          "https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}"
+
+  deploy-vercel:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install Vercel CLI
+      run: npm i -g vercel
+      
+    - name: Deploy to Vercel
+      run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+      env:
+        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+  deploy-netlify:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/demo'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Build application
+      run: |
+        composer install --optimize-autoloader --no-dev
+        npm ci
+        npm run build
+        
+    - name: Deploy to Netlify
+      uses: netlify/actions/cli@master
+      with:
+        args: deploy --prod --dir=public
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
